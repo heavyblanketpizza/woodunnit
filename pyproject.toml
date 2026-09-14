@@ -1,0 +1,96 @@
+[project]
+name = "woodunnit"
+version = "0.1.0"
+description = "Provenance-preserving microscopy dataset ingestion and OpenCV preprocessing"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12,<3.14"
+dependencies = ["pillow>=11,<13", "pydantic>=2.10,<3", "pyyaml>=6,<7"]
+
+[project.scripts]
+woodunnit = "woodunnit.cli:main"
+
+[project.optional-dependencies]
+preprocessing = [
+    "numpy>=2.2,<3",
+    "opencv-python-headless>=4.13,<5",
+    "torch==2.14.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+# Explicit file lists also protect source distributions and wheels.
+[tool.hatch.build.targets.sdist]
+only-include = [
+    ".gitignore",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "configs/ingestion.example.toml",
+    "pyproject.toml",
+    "scripts/acquisition/download_collections.py",
+    "scripts/acquisition/finalize_downloads.py",
+    "scripts/check_publication.py",
+    "src/woodunnit/__init__.py",
+    "src/woodunnit/__main__.py",
+    "src/woodunnit/adapters.py",
+    "src/woodunnit/cli.py",
+    "src/woodunnit/config.py",
+    "src/woodunnit/curation.py",
+    "src/woodunnit/dataset.py",
+    "src/woodunnit/experiment_split.py",
+    "src/woodunnit/io.py",
+    "src/woodunnit/pipeline.py",
+    "src/woodunnit/preprocessing.py",
+    "src/woodunnit/release.py",
+    "src/woodunnit/schema.py",
+    "src/woodunnit/taxonomy.py",
+    "tests/test_acquisition_scope.py",
+    "tests/test_adapters.py",
+    "tests/test_cli.py",
+    "tests/test_config.py",
+    "tests/test_curation.py",
+    "tests/test_dataset.py",
+    "tests/test_experiment_split.py",
+    "tests/test_pipeline.py",
+    "tests/test_preprocessing.py",
+    "tests/test_publication.py",
+    "tests/test_release.py",
+    "tests/test_taxonomy.py",
+    "uv.lock",
+]
+
+[tool.hatch.build.targets.wheel]
+sources = ["src"]
+only-include = [
+    "src/woodunnit/__init__.py",
+    "src/woodunnit/__main__.py",
+    "src/woodunnit/adapters.py",
+    "src/woodunnit/cli.py",
+    "src/woodunnit/config.py",
+    "src/woodunnit/curation.py",
+    "src/woodunnit/dataset.py",
+    "src/woodunnit/experiment_split.py",
+    "src/woodunnit/io.py",
+    "src/woodunnit/pipeline.py",
+    "src/woodunnit/preprocessing.py",
+    "src/woodunnit/release.py",
+    "src/woodunnit/schema.py",
+    "src/woodunnit/taxonomy.py",
+]

@@ -1,0 +1,6 @@
+# Copy to ingestion.toml (ignored by Git) and configure your local storage.
+# Relative paths resolve against the configuration file's directory.
+raw_root = "../data/raw"
+output_root = "../data/derived"
+verify_images = true
+task_groups = ["fungi", "oomycetes"]
